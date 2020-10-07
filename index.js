@@ -2,6 +2,7 @@ var sql = require('mssql');
 var fs = require('fs');
 var config = require('./config.js'); //file with credential
 
+
 var conn = new sql.ConnectionPool(config.db);
 var req = new sql.Request(conn);
 
@@ -10,26 +11,24 @@ var req = new sql.Request(conn);
 function getXML(){
     conn.connect(function (err){
         if(err)
-            //throw err;
             console.log(err);
-    });
-    req.query('SELECT * FROM ', function(err, recordset){
-        if(err)
-            //throw err;
-            console.log(err);
-        else   
-            console.log(recordset);
-        conn.close();
+        req.query('SELECT dbo.fnACRONIS_WebOrders() AS Orders ', function(err, recordset){
+            if(err)
+                console.log(err);
+            else { 
+
+                //create file xml
+                
+                var date = new Date();
+                var filename = date.getFullYear().toString() + ('0' + (date.getMonth() + 1).toString()).slice(-2) + ( '0' + date.getDate().toString()) + '.xml';
+                fs.writeFileSync(filename, recordset.recordset[0].Orders);
+            }
+            conn.close();
+        });
     });
 };
 
 getXML();
 
-//create a xml file with query result
 
-/*
-var date = new Date();
-var filename = getFullYear(date).toString() + ('0' + getMonth(date) + 1).slice(-1).toString() + getDate(date).toString() + '.xml';
 
-fs.writeFileSync(filename, getXML());
-*/
