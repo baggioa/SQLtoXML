@@ -1,0 +1,15 @@
+{
+  "name": "sql_to_xml",
+  "version": "1.0.0",
+  "description": "Create xml file from SQL query",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "and.baggio@hotmail.it",
+  "license": "ISC",
+  "dependencies": {
+    "mssql": "^6.2.3"
+  }
+}
