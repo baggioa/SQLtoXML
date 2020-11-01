@@ -20,7 +20,7 @@ function getXML(){
                 //create file xml
                 
                 var date = new Date();
-                var filename = date.getFullYear().toString() + ('0' + (date.getMonth() + 1).toString()).slice(-2) + ( '0' + date.getDate().toString()) + '.xml';
+                var filename = date.getFullYear().toString() + ('0' + (date.getMonth() + 1).toString()).slice(-2) + ( '0' + date.getDate().toString()).slice(-2) + '.xml';
                 fs.writeFileSync(filename, recordset.recordset[0].Orders);
             }
             conn.close();
